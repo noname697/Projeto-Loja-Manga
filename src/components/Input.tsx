@@ -10,11 +10,12 @@ const InputEstilizado = styled.input`
 
 interface InputProps {
   type: string;
-  name: string;
+  id: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({ type, name }: InputProps) => {
-  return <InputEstilizado type={type} name={name} />;
+const Input = ({ type, id, onChange }: InputProps) => {
+  return <InputEstilizado type={type} id={id} onChange={onChange} />;
 };
 
 export default Input;

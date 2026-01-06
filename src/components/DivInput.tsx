@@ -10,14 +10,15 @@ const DivEstilizada = styled.div`
 interface DivInputProps {
   text: string;
   type: string;
-  name: string;
+  id: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const DivInput = ({ text, type, name }: DivInputProps) => {
+const DivInput = ({ text, type, id, onChange }: DivInputProps) => {
   return (
     <DivEstilizada>
-      <label htmlFor={name}>{text}</label>
-      <Input type={type} name={name} />
+      <label htmlFor={id}>{text}</label>
+      <Input type={type} id={id} onChange={onChange} />
     </DivEstilizada>
   );
 };
