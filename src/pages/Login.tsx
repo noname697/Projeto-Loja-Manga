@@ -2,6 +2,7 @@ import styled from "styled-components";
 import DivInput from "../components/DivInput";
 import Button from "../components/Button";
 import { useState } from "react";
+import { ContextLogin } from "../assets/contexts/ContextLogin";
 
 const Container = styled.div`
   height: 100vh;
@@ -37,37 +38,29 @@ function App() {
   };
 
   return (
-    <Container>
-      <DivEstilizada>
-        <h1
-          style={{
-            borderBottom: "2px solid #000",
-            fontSize: "24px",
-            paddingBottom: "5px",
-            display: "inline-block",
-          }}
-        >
-          Login
-        </h1>
-        <FormularioEstilizado>
-          <DivInput
-            text="Email"
-            type="email"
-            id="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <DivInput
-            text="Senha"
-            type="password"
-            id="senha"
-            onChange={(e) => setSenha(e.target.value)}
-          />
-          <Button onClick={(e: React.FormEvent) => submitForm(e)}>
-            Entrar
-          </Button>
-        </FormularioEstilizado>
-      </DivEstilizada>
-    </Container>
+    <ContextLogin.Provider value={{ setEmail, setSenha }}>
+      <Container>
+        <DivEstilizada>
+          <h1
+            style={{
+              borderBottom: "2px solid #000",
+              fontSize: "24px",
+              paddingBottom: "5px",
+              display: "inline-block",
+            }}
+          >
+            Login
+          </h1>
+          <FormularioEstilizado>
+            <DivInput text="Email" type="email" id="email" />
+            <DivInput text="Senha" type="password" id="senha" />
+            <Button onClick={(e: React.FormEvent) => submitForm(e)}>
+              Entrar
+            </Button>
+          </FormularioEstilizado>
+        </DivEstilizada>
+      </Container>
+    </ContextLogin.Provider>
   );
 }
 

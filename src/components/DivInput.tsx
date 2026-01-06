@@ -11,14 +11,13 @@ interface DivInputProps {
   text: string;
   type: string;
   id: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const DivInput = ({ text, type, id, onChange }: DivInputProps) => {
+const DivInput = ({ text, type, id }: DivInputProps) => {
   return (
     <DivEstilizada>
       <label htmlFor={id}>{text}</label>
-      <Input type={type} id={id} onChange={onChange} />
+      <Input type={type} id={id} />
     </DivEstilizada>
   );
 };
