@@ -1,11 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
+import App from "./pages/Login.tsx";
 import { BrowserRouter, Route, Routes } from "react-router";
-import { createGlobalStyle } from "styled-components";
-const GlobalStyle = createGlobalStyle`
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { theme } from "./assets/styles/ThemeProvider.tsx";
+
+const GlobalStyles = createGlobalStyle`
 :root {
-  font-family: "Inter";
+  font-family: ${(props) => props.theme.fonts.main};
   line-height: 1.5;
   font-weight: 400;
 
@@ -58,11 +60,13 @@ table {
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <GlobalStyle />
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   </StrictMode>
 );
