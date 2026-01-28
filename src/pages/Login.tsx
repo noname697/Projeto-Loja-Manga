@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import DivInput from "../components/DivInput";
 import Button from "../components/Button";
-import { useState } from "react";
+import { useContext } from "react";
 import { ContextLogin } from "../assets/contexts/ContextLogin";
+import { useNavigate } from "react-router";
 
 const Container = styled.div`
   height: 100vh;
@@ -28,17 +29,21 @@ const FormularioEstilizado = styled.form`
   gap: 30px;
 `;
 
-function App() {
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+function Login() {
+  const { signIn } = useContext(ContextLogin);
+  const navigate = useNavigate();
 
-  const submitForm = (e: React.FormEvent) => {
+  const submitForm = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(email, senha);
+    try {
+      await signIn();
+      navigate("/teste");
+    } catch (erro) {
+      alert({ manesagem: "Erro ao efetuar login.", erro: erro });
+    }
   };
 
   return (
-    <ContextLogin.Provider value={{ setEmail, setSenha }}>
       <Container>
         <DivEstilizada>
           <h1
@@ -60,8 +65,7 @@ function App() {
           </FormularioEstilizado>
         </DivEstilizada>
       </Container>
-    </ContextLogin.Provider>
   );
 }
 
-export default App;
+export default Login;

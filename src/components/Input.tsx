@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { ContextLogin } from "../assets/contexts/ContextLogin";
+import { ContextLogin } from "../assets/contexts/ContextLogin.ts";
 
 const InputEstilizado = styled.input`
   border: 1px solid ${(props) => props.theme.colors.secundaria};
@@ -16,16 +16,20 @@ interface InputProps {
 }
 
 const Input = ({ type, id }: InputProps) => {
-  const ctx = useContext(ContextLogin);
+  const context = useContext(ContextLogin);
+
+  if (!context) return null;
+
+  const value = id === "email" ? context.email : context.senha;
+  const setter = id === "email" ? context.setEmail : context.setSenha;
+
   return (
     <InputEstilizado
-      type={type}
       id={id}
-      onChange={
-        id === "email"
-          ? (e) => ctx?.setEmail(e.target.value)
-          : (e) => ctx?.setSenha(e.target.value)
-      }
+      type={type}
+      value={value}
+      onChange={(e) => setter(e.target.value)}
+      // onChange={() => console.log(id)}
     />
   );
 };

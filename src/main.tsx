@@ -1,9 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./pages/Login.tsx";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { theme } from "./assets/styles/ThemeProvider.tsx";
+import Login from "./pages/Login.tsx";
+import { AuthProvider } from "./assets/contexts/AuthProvider.tsx";
 
 const GlobalStyles = createGlobalStyle`
 :root {
@@ -60,13 +61,15 @@ table {
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} />
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
-  </StrictMode>
+    <AuthProvider>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </AuthProvider>
+  </StrictMode>,
 );
