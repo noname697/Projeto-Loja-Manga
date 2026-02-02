@@ -6,6 +6,8 @@ declare module "styled-components" {
       background: string;
       primaria: string;
       secundaria: string;
+      branco: string;
+      preto: string;
     };
     fonts: {
       main: string;

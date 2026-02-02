@@ -12,6 +12,7 @@ const DivEstilizada = styled.div`
   text-align: center;
   h1 {
     font-size: 30rem;
+    margin-top: 50px;
   }
   h2 {
     font-size: 3rem;

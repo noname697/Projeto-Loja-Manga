@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import api from "../../services/axios";
 import { ContextLogin } from "./ContextLogin";
 
@@ -11,8 +11,27 @@ export interface User {
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(null);
+  const [user, setUser] = useState<User | null>(() => {
+    const storagedUser = localStorage.getItem("@App:user");
+    if (storagedUser && storagedUser !== "undefined") {
+      try {
+        return JSON.parse(storagedUser);
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    }
+    return null;
+  });
+  const [token, setToken] = useState<string | null>(() => {
+    return localStorage.getItem("@App:token");
+  });
+
+  useEffect(() => {
+    if (token) {
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    }
+  }, [token]);
 
   async function signIn() {
     try {
@@ -21,6 +40,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       setUser(userData);
       setToken(userToken);
+
+      localStorage.setItem("@App:user", JSON.stringify(userData));
+      localStorage.setItem("@App:token", userToken);
+
       api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
     } catch (error) {
       console.error("Erro no login", error);
@@ -29,6 +52,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }
 
   function logout() {
+    localStorage.removeItem("@App:user");
+    localStorage.removeItem("@App:token");
     setUser(null);
     setToken(null);
   }
