@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import DivInput from "../components/DivInput";
-import Button from "../components/Button";
+import DivInput from "../../components/DivInput";
+import Button from "../../components/Button";
 import { useContext } from "react";
-import { ContextLogin } from "../assets/contexts/ContextLogin";
+import { ContextLogin } from "../../assets/contexts/ContextLogin";
 import { useNavigate } from "react-router";
 
 const Container = styled.div`
@@ -37,7 +37,7 @@ function Login() {
     e.preventDefault();
     try {
       await signIn();
-      navigate("/teste");
+      navigate("/");
     } catch (erro) {
       alert({ manesagem: "Erro ao efetuar login.", erro: erro });
     }

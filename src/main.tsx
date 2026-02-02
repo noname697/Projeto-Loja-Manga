@@ -3,8 +3,10 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { theme } from "./assets/styles/ThemeProvider.tsx";
-import Login from "./pages/Login.tsx";
+import Login from "./pages/login/Login.tsx";
 import { AuthProvider } from "./assets/contexts/AuthProvider.tsx";
+import PaginaBase from "./pages/paginaBase/paginaBase.tsx";
+import Page404 from "./pages/page404/page404.tsx";
 
 const GlobalStyles = createGlobalStyle`
 :root {
@@ -66,7 +68,11 @@ createRoot(document.getElementById("root")!).render(
         <GlobalStyles />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
+            <Route element={<PaginaBase />}>
+              {/* <Route index element={PaginaInicial} /> */}
+              <Route path="*" element={<Page404 />} />
+            </Route>
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
