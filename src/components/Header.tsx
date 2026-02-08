@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { ContextLogin } from "../assets/contexts/ContextLogin";
+import { useNavigate } from "react-router";
 
 const HeaderEstilizado = styled.header`
   background-color: ${(props) => props.theme.colors.primaria};
@@ -37,6 +38,8 @@ const ContaEstilizada = styled.div`
 const Header = () => {
   const { user } = useContext(ContextLogin);
 
+  const navigate = useNavigate();
+
   // if (!user) return null;
 
   return (
@@ -67,7 +70,10 @@ const Header = () => {
             />
           )
         ) : (
-          <li style={{ listStyle: "none", color: "white", cursor: "pointer" }}>
+          <li
+            onClick={() => navigate("/login")}
+            style={{ listStyle: "none", color: "white", cursor: "pointer" }}
+          >
             Entrar
           </li>
         )}

@@ -67,9 +67,9 @@ const NavButton = styled.button`
 `;
 
 const imagens = [
-  "https://img.freepik.com/psd-premium/modelo-de-banner-do-youtube-para-livraria-online_23-2149043278.jpg?semt=ais_hybrid&w=740&q=80",
-  "https://mondru.com/wp-content/uploads/2018/10/Banner-Livro-Slide-1-scaled.jpg",
-  "https://editorabatistaregular.com.br/wp-content/uploads/2021/04/livro-banner-c.jpg",
+  "ImagemBannerUm.png",
+  "ImagemBannerDois.png",
+  "ImagemBannerTres.png",
 ];
 
 const Slider = () => {

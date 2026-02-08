@@ -20,7 +20,10 @@ const Titulo = ({
         color: cor,
         fontWeight: peso,
         textAlign: alinhamento,
-        padding: "5rem 0",
+        margin: "5rem 0",
+        padding: "0.5rem",
+        borderBottom: `3px solid ${cor}`,
+        display: "inline-block"
       }}
     >
       {children}
