@@ -7,6 +7,7 @@ import Login from "./pages/login/Login.tsx";
 import { AuthProvider } from "./assets/contexts/AuthProvider.tsx";
 import PaginaBase from "./pages/paginaBase/paginaBase.tsx";
 import Page404 from "./pages/page404/page404.tsx";
+import PaginaInicial from "./pages/PaginaInicial/PaginaInicial.tsx";
 
 const GlobalStyles = createGlobalStyle`
 :root {
@@ -70,7 +71,7 @@ createRoot(document.getElementById("root")!).render(
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route element={<PaginaBase />}>
-              {/* <Route index element={PaginaInicial} /> */}
+              <Route index element={<PaginaInicial />} />
               <Route path="*" element={<Page404 />} />
             </Route>
           </Routes>
